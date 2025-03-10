@@ -1,21 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ejemplo</title>
-</head>
-
-<body>
-    <script>
-        fetch('/vinos')
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vinos de la Bodega</title>
+  <link rel="stylesheet" href="style.css">
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      
+      fetch('/vinos')
         .then(response => response.json())
-        .then(data => {
-            console.log(data);
-        })
-        .catch(error => console.log(error))
-    </script>
-</body>
+        .then(vinos => {
+          const vinosList = document.getElementById("vinos-list");
 
+          
+          vinos.forEach(vino => {
+            const vinoItem = document.createElement("li");
+            vinoItem.textContent = `${vino.nombre} (${vino.año}) - Tipo: ${vino.tipo} - Precio: $${vino.precio}`;
+            vinosList.appendChild(vinoItem);
+          });
+        })
+        .catch(error => console.error('Error al cargar los vinos:', error));
+    });
+  </script>
+</head>
+<body>
+  <h1>Vinos de la Bodega</h1>
+  <ul id="vinos-list">
+   
+  </ul>
+</body>
 </html>

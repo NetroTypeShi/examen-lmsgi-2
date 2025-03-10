@@ -32,9 +32,11 @@ app.get('/endpoints', (req, res) => {
 });
 
 app.get('/vinos', (req, res) => {
-    const vinos = db.prepare('SELECT * FROM vinos').all();
-    res.json(vinos);
+  
+  const vinos = db.prepare('SELECT nombre, año, tipo, precio FROM vinos').all();
+  res.json(vinos);
 });
+
 
 app.get('/catas', (req, res) => {
     const catas = db.prepare('SELECT * FROM catas').all();
